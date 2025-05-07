@@ -382,6 +382,13 @@ def ejecutar():
                     ruta_reporte = f"reports/{nombre_archivo}.txt"
                     report_generator.generar_reporte(datos, ruta_reporte)
                     print(f"\n[+] Reporte generado: {os.path.abspath(ruta_reporte)}")
+                    
+                    # Preguntar si desea generar PDF
+                    respuesta_pdf = input("\n¿Desea exportar el reporte como PDF? (s/n): ").lower()
+                    if respuesta_pdf == 's':
+                        ruta_pdf = f"reports/{nombre_archivo}.pdf"
+                        report_generator.generar_reporte_pdf(datos, ruta_pdf)
+                    
                     print("Informe guardado correctamente. Pulse M para volver al menú principal.")
                     while True:
                         tecla = input().lower()
@@ -414,6 +421,13 @@ def ejecutar():
                     ruta_reporte = f"reports/{nombre_archivo}.txt"
                     report_generator.generar_reporte(datos, ruta_reporte)
                     print(f"\n[+] Reporte generado: {os.path.abspath(ruta_reporte)}")
+                    
+                    # Preguntar si desea generar PDF
+                    respuesta_pdf = input("\n¿Desea exportar el reporte como PDF? (s/n): ").lower()
+                    if respuesta_pdf == 's':
+                        ruta_pdf = f"reports/{nombre_archivo}.pdf"
+                        report_generator.generar_reporte_pdf(datos, ruta_pdf)
+                    
                     print("Informe guardado correctamente. Pulse M para volver al menú principal.")
                     while True:
                         tecla = input().lower()
