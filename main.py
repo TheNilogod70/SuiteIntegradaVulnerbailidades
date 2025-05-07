@@ -256,7 +256,13 @@ def ejecutar_comando(comando: str) -> str:
     """
     try:
         resultado = subprocess.run(comando, shell=True, capture_output=True, text=True)
-        return resultado.stdout
+        salida = resultado.stdout.strip()
+        print(f"\n[DEBUG] Output length: {len(salida)} characters")
+        
+        if not salida or len(salida) < 10:
+            print("\n[!] Warning: No output was captured. The report may be empty.")
+            
+        return salida
     except Exception as e:
         print(f"\n[!] Error al ejecutar el comando: {str(e)}")
         logging.error(f"Error al ejecutar comando: {str(e)}")
@@ -376,6 +382,11 @@ def ejecutar():
                     ruta_reporte = f"reports/{nombre_archivo}.txt"
                     report_generator.generar_reporte(datos, ruta_reporte)
                     print(f"\n[+] Reporte generado: {os.path.abspath(ruta_reporte)}")
+                    print("Informe guardado correctamente. Pulse M para volver al menú principal.")
+                    while True:
+                        tecla = input().lower()
+                        if tecla == 'm':
+                            break
                 else:
                     print("\n[!] Nombre de archivo inválido. No use caracteres especiales.")
 
@@ -403,6 +414,11 @@ def ejecutar():
                     ruta_reporte = f"reports/{nombre_archivo}.txt"
                     report_generator.generar_reporte(datos, ruta_reporte)
                     print(f"\n[+] Reporte generado: {os.path.abspath(ruta_reporte)}")
+                    print("Informe guardado correctamente. Pulse M para volver al menú principal.")
+                    while True:
+                        tecla = input().lower()
+                        if tecla == 'm':
+                            break
                 else:
                     print("\n[!] Nombre de archivo inválido. No use caracteres especiales.")
 
