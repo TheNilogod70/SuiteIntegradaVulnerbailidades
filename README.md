@@ -1,68 +1,136 @@
-# Suite Integrada de Auditoría de Vulnerabilidades (TdeA - SIDV)
+# 🛡️ TdeA - SIDV: Suite Integrada de Detección de Vulnerabilidades
 
-Esta suite permite realizar auditorías de seguridad básicas usando herramientas como Nmap y Nikto, centralizando los resultados en reportes organizados. Incluye una barra de progreso, un sistema de reportes, verificación de dependencias automática y se ejecuta directamente en entornos Linux con Bash.
+**Versión:** 1.7 BETA  
+**Desarrollado por:** TheNiloGod  
+**Semillero de Ciberseguridad, Tecnológico de Antioquia**
 
-## ✅ Requisitos del Sistema
+---
 
-- **Sistema operativo:** Kali Linux o cualquier distribución basada en Debian
-- **Entorno:** Terminal Bash (no funciona en CMD ni PowerShell)
-- **Interfaz:** CLI (línea de comandos)
-- **Usuario:** Debe tener permisos sudo o root para ejecutar setup.sh
+## 📈 Descripción del Proyecto
 
-### Dependencias:
-- Python 3
-- Nmap
-- Nikto
+TdeA - SIDV es una herramienta de auditoría de seguridad en consola (CLI), diseñada para estudiantes, investigadores y profesionales que requieren realizar escaneos básicos de vulnerabilidades de manera automatizada y estructurada.
 
-## 🚀 Instalación y Uso
+Incluye:
+- Escaneos con **Nmap** (detección de puertos/servicios)
+- Análisis con **Nikto** (vulnerabilidades web)
+- Generación de reportes automáticos en `.txt` y `.pdf`
+- Ejecución guiada desde terminal con interfaz amigable
 
-1. Clonar el repositorio:
+---
 
-   ```bash
-   git clone https://github.com/TheNilogod70/SuiteIntegradaVulnerbailidades.git
-   ```
+## 🚀 Instalación
 
-2. Ingresar al directorio del proyecto:
+### 🌟 Requisitos
+- Sistema operativo: **Kali Linux**, Debian, Ubuntu o derivado (físico o virtualizado)
+- **Python 3** instalado
+- Acceso a `sudo`
 
-   ```bash
-   cd SuiteIntegradaVulnerbailidades
-   ```
+### 📅 Instalación en sistema Linux nativo
+```bash
+git clone https://github.com/TheNilogod70/SuiteIntegradaVulnerbailidades.git
+cd SuiteIntegradaVulnerbailidades
+sudo python3 main.py
+```
+> ✅ El sistema ejecutará automáticamente `setup.sh` para:
+> - Instalar Nmap, Nikto y ReportLab (PDF)
+> - Crear carpetas `logs/` y `reports/`
+> - Otorgar permisos de ejecución
 
-3. Ejecutar la suite (se autoconfigura al inicio):
+### 🚀 Instalación en máquina virtual (VirtualBox / VMware)
+1. Descarga Kali Linux desde: [https://www.kali.org/get-kali/](https://www.kali.org/get-kali/)
+2. Crea una máquina virtual con al menos:
+   - 2 GB RAM
+   - 2 CPU
+   - 15 GB de disco
+3. Instala Git:
+```bash
+sudo apt update && sudo apt install git
+```
+4. Clona el proyecto y ejecútalo:
+```bash
+git clone https://github.com/TheNilogod70/SuiteIntegradaVulnerbailidades.git
+cd SuiteIntegradaVulnerbailidades
+sudo python3 main.py
+```
 
-   ```bash
-   python3 main.py
-   ```
+---
 
-   🔐 **NOTA:** Se solicitará contraseña sudo al correr el setup automáticamente.
+## 📚 Uso de la Suite
 
-## ⚙️ Cómo funciona
+### ▶ Menú principal:
+```
+1. Escanear con Nmap
+2. Analizar con Nikto
+3. Ver reportes generados
+4. Salir
+```
 
-- Al iniciar, verifica e instala automáticamente herramientas requeridas
-- Muestra un logo de bienvenida animado
-- Presenta un menú con 4 opciones:
-   1. Escanear con Nmap
-   2. Analizar con Nikto
-   3. Ver reportes generados
-   4. Salir
-- Al realizar un análisis, se muestra una barra de progreso
-- Finalizado el escaneo, puedes generar un reporte que se guarda en la carpeta `reports/`
-- Los reportes pueden visualizarse directamente desde la suite
+### ✏️ Escanear:
+- Opcion 1: IP o dominio (ej: 127.0.0.1 o google.com)
+- Opcion 2: URL completa (ej: http://testphp.vulnweb.com)
+- Se mostrará barra de carga durante el análisis
 
-## 📘 Manual del Usuario
+### 📃 Reporte:
+- Se pregunta si desea generar un reporte
+- El usuario ingresa el nombre del archivo
+- Luego se ofrece generar también el archivo en **PDF**
+- Ambos archivos se guardan en `reports/`
 
-- Ejecuta la suite con permisos adecuados (sudo si se solicita)
-- Usa dominios válidos (http:// o https://) para Nikto y direcciones IP o dominios para Nmap
-- Para generar reportes, usa nombres simples, sin caracteres especiales
-- Para ver reportes anteriores, elige la opción 3 del menú
+### 📑 Ver reportes:
+- Opcion 3: listar reportes `.txt` existentes
+- Selecciona un número y se muestra su contenido
 
-## 📝 Notas Adicionales
+---
 
-- No se requiere conexión a internet para escanear IPs locales
-- Los reportes son archivos `.txt` que pueden abrirse desde cualquier editor de texto
-- El script `setup.sh` se genera automáticamente si no existe
+## 📂 Estructura de Carpetas
+```
+SuiteIntegradaVulnerbailidades/
+├── main.py
+├── setup.sh
+├── modules/
+│   ├── nmap_module.py
+│   └── nikto_module.py
+├── utils/
+│   └── report_generator.py
+├── reports/      # reportes generados
+└── logs/         # registros internos
+```
 
-## 👨‍💻 Créditos y Licencia
+---
 
-- Desarrollado por: TheNilogod70
-- Licencia: MIT 
+## 📰 Resultado esperado
+
+- Reportes en `reports/` con nombre personalizado
+- Contenido en PDF incluye:
+  - Fecha y hora
+  - Comando ejecutado
+  - Resultados completos
+- PDF listo para entrega ante jurado o archivo académico
+
+---
+
+## ⚡ Recomendaciones
+
+- Ejecutar como `sudo` para evitar errores de permisos
+- Usar una red de prueba o entorno controlado
+- No reemplazar reportes existentes sin cambiar nombre
+- Ideal para presentaciones o talleres de auditoría
+
+---
+
+## 🔧 Futuras mejoras (v2.x)
+
+- Exportación a HTML interactivo
+- Integración con herramientas como `wpscan`, `sqlmap`
+- Modo silencioso / verbose
+- Soporte multilingüístico (ES/EN)
+
+---
+
+## 📖 Licencia y autoría
+
+Este proyecto fue desarrollado con fines académicos por **TheNiloGod** para el **Semillero de Ciberseguridad del Tecnológico de Antioquia**.
+
+Se permite su uso, modificación y extensión siempre que se mantenga el crédito al autor.
+
+> © 2025 TheNiloGod. Todos los derechos reservados.
